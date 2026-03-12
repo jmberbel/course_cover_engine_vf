@@ -1,3 +1,7 @@
-FROM nginx:alpine
-COPY course_cover_engine_vf.html /usr/share/nginx/html/index.html
-EXPOSE 80
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json ./
+RUN npm install --production
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]

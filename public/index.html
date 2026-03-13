@@ -18,7 +18,7 @@
     ::-webkit-scrollbar-track{background:transparent}
     input[type=range]{width:100%;height:3px;cursor:pointer;accent-color:#5470F5}
     input:focus,textarea:focus,select:focus{outline:none}
-    select{outline:none;appearance:none}
+    select{outline:none;appearance:none
     @keyframes fu{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
     @keyframes spin{to{transform:rotate(360deg)}}
     button{font-family:'Inter',system-ui,sans-serif}
@@ -597,7 +597,13 @@ async function geminiText(sys, user, imgs = [], key = GEMINI_KEY, model = GEMINI
         generationConfig: {
           temperature: 0.9,
           maxOutputTokens: 1400
-        }
+        },
+        safetySettings: [
+          {category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE"},
+          {category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE"},
+          {category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE"},
+          {category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE"}
+        ]
       })
     });
     if (!res.ok) {
